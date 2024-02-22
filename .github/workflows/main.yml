@@ -68,3 +68,12 @@ jobs:
           pylint --disable=trailing-whitespace,missing-class-docstring,missing-final-newline,trailing-newlines \
                   --fail-under=9.0 \
                   $(git ls-files '*.py') || echo "::warning::Pylint check failed, but the workflow will continue."
+  bump:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Bump version
+        uses: remorses/bump-version@js
+        with:
+          version_file: ./VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
